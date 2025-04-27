@@ -8,15 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    private let weatherService = WeatherService()
+    
+    @State private var isNight = false
+    @State private var temperature = 0.0
+    @State private var isLoading = false
+    @State private var errorMessage = "";
+    
+    
+    private func getWeather() {
+        weatherService.fetchWeather(latitude: -18.8792, longitude: 47.5079) { result in
+            switch result {
+            case .success(let weather):
+                self.temperature = weather.temperature
+                self.isLoading = false
+            case .failure(let error):
+               self.errorMessage = error.localizedDescription
+                self.isLoading = false
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            BackgroundView(topColor: .blue, bottomColor: Color("lightBlue"))
+            BackgroundView(isNight: $isNight)
             
             VStack {
                 CityTextView(cityName: "Antananarivo")
                 
                 VStack(spacing: 10) {
-                    MaintWeatherStatusView(imageName: "cloud.sun.fill", temperature: 76)
+                    MaintWeatherStatusView(imageName: isNight ? "moon.stars.fill": "cloud.sun.fill", temperature:Int(temperature))
                     
                     HStack(spacing: 10) {
                         WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 72)
@@ -29,17 +50,17 @@ struct ContentView: View {
                     Spacer()
                     
                     Button {
-                        print("tapped")
+                        withAnimation {
+                            isNight.toggle()
+                        }
                     } label: {
-                        Text("Change date time.")
-                            .frame(width: 280, height: 50)
-                            .background(.white)
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .cornerRadius(10)
+                        WeathButton(title: "Change day time", textColor: .blue, backgroundColor: .white)
                     }
                     
                     Spacer()
                 }
+            }.onAppear() {
+                getWeather()
             }
         }
     }
@@ -76,11 +97,13 @@ struct ContentView: View {
     
     struct BackgroundView: View {
         
-        var topColor: Color;
-        var bottomColor: Color
+        @Binding var isNight: Bool
         
         var body: some View {
-            LinearGradient(gradient: Gradient(colors: [topColor, bottomColor]), startPoint: .topLeading, endPoint: .bottomTrailing).ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [isNight ?.black: .blue, isNight ? .gray: Color("lightBlue")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .ignoresSafeArea(.all)
+                .animation(.easeInOut(duration: 1.0), value: isNight)
+            
         }
     }
     
@@ -107,7 +130,7 @@ struct ContentView: View {
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fit)
-                    .frame(width: 180, height: 180, alignment: .center )
+                    .frame(width: 180, height: 180, alignment: .center)
                 
                 Text("\(temperature)°")
                     .font(.system(size: 70, weight: .medium))
@@ -116,6 +139,21 @@ struct ContentView: View {
             }
             .padding(.bottom, 50)
             
+        }
+    }
+    
+    struct WeathButton: View {
+        var title: String
+        var textColor: Color
+        var backgroundColor: Color
+        
+        var body: some View {
+            Text(title)
+                .frame(width: 280, height: 50)
+                .background(backgroundColor)
+                .font(.system(size: 20, weight: .bold, design: .default))
+                .cornerRadius(10)
+                .foregroundColor(textColor)
         }
     }
 }

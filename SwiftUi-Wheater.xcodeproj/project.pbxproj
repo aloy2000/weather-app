@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		554592362DBE25EB005FAFC0 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554592352DBE25EB005FAFC0 /* WeatherResponse.swift */; };
+		554592382DBE26BA005FAFC0 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554592372DBE26BA005FAFC0 /* WeatherService.swift */; };
 		5555CC322DAAE203000A744A /* SwiftUi_WheaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555CC312DAAE203000A744A /* SwiftUi_WheaterApp.swift */; };
 		5555CC342DAAE203000A744A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5555CC332DAAE203000A744A /* ContentView.swift */; };
 		5555CC362DAAE205000A744A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5555CC352DAAE205000A744A /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		554592352DBE25EB005FAFC0 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		554592372DBE26BA005FAFC0 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		5555CC2E2DAAE203000A744A /* SwiftUi-Wheater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUi-Wheater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5555CC312DAAE203000A744A /* SwiftUi_WheaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUi_WheaterApp.swift; sourceTree = "<group>"; };
 		5555CC332DAAE203000A744A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 				5555CC332DAAE203000A744A /* ContentView.swift */,
 				5555CC352DAAE205000A744A /* Assets.xcassets */,
 				5555CC372DAAE205000A744A /* Preview Content */,
+				554592352DBE25EB005FAFC0 /* WeatherResponse.swift */,
+				554592372DBE26BA005FAFC0 /* WeatherService.swift */,
 			);
 			path = "SwiftUi-Wheater";
 			sourceTree = "<group>";
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				554592382DBE26BA005FAFC0 /* WeatherService.swift in Sources */,
 				5555CC342DAAE203000A744A /* ContentView.swift in Sources */,
+				554592362DBE25EB005FAFC0 /* WeatherResponse.swift in Sources */,
 				5555CC322DAAE203000A744A /* SwiftUi_WheaterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
